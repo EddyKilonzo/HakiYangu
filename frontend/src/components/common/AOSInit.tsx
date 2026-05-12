@@ -14,15 +14,22 @@ export function AOSInit() {
       easing: 'ease-out-cubic',
       once: false,
       mirror: true,
-      offset: 60,
+      offset: 40,
       delay: 0,
+      disable: false, // Ensure it's enabled on all devices
     });
   }, []);
 
-  // On route change, wait one tick for new DOM to paint then re-init all elements
+  // On route change or scroll, refresh AOS to find new elements
   useEffect(() => {
-    const id = setTimeout(() => AOS.refreshHard(), 60);
-    return () => clearTimeout(id);
+    const handleRefresh = () => AOS.refreshHard();
+    const id = setTimeout(handleRefresh, 100);
+    
+    window.addEventListener('scroll', handleRefresh, { passive: true });
+    return () => {
+      clearTimeout(id);
+      window.removeEventListener('scroll', handleRefresh);
+    };
   }, [pathname]);
 
   return null;
