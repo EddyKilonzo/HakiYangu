@@ -23,7 +23,7 @@ export function MessageBubble({ message }: MessageBubbleProps) {
     >
       <div className={`flex max-w-[85%] md:max-w-[75%] ${isUser ? 'flex-row-reverse' : 'flex-row'} items-start gap-3`}>
         {!isUser && (
-          <div className="mt-1 flex-shrink-0">
+          <div className="mt-1 shrink-0">
             <div
               className="flex h-9 w-9 items-center justify-center rounded-xl shadow-card"
               style={{ background: 'var(--color-primary)', color: '#FFF6F6' }}
@@ -56,8 +56,8 @@ export function MessageBubble({ message }: MessageBubbleProps) {
             {isUser ? (
               <p className="font-medium">{message.content}</p>
             ) : (
-              <div
-                className="prose prose-sm max-w-none min-w-0 break-words prose-headings:font-serif prose-headings:text-primary prose-a:text-primary prose-strong:text-primary"
+                <div
+                className="prose prose-sm max-w-none min-w-0 wrap-break-word prose-headings:font-serif prose-headings:text-primary prose-a:text-primary prose-strong:text-primary"
                 style={{ color: 'var(--color-text)' } as React.CSSProperties}
               >
                 <ReactMarkdown>{message.content}</ReactMarkdown>

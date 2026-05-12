@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useChat } from '@/hooks/useChat';
 import { MessageBubble, TypingIndicator } from './MessageBubble';
@@ -45,7 +45,14 @@ function LetterIcon() {
 export function ChatInterface() {
   const { language, t } = useLanguage();
   const { messages, isLoading, error, detectedArea, suggestLetter, send, clear } = useChat(language);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(() => {
+    if (typeof window === 'undefined') return '';
+    try {
+      return sessionStorage.getItem('hakiyangu-prefill') ?? '';
+    } catch {
+      return '';
+    }
+  });
   const [scenarios, setScenarios] = useState<Scenario[]>([]);
   const [letterOpen, setLetterOpen] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -55,12 +62,16 @@ export function ChatInterface() {
     getScenarios().then((d) => setScenarios(d.scenarios)).catch(() => {});
   }, []);
 
-  useEffect(() => {
-    const prefill = sessionStorage.getItem('hakiyangu-prefill');
-    if (prefill) {
-      setInput(prefill);
-      sessionStorage.removeItem('hakiyangu-prefill');
-      textareaRef.current?.focus();
+  useLayoutEffect(() => {
+    try {
+      const key = 'hakiyangu-prefill';
+      const stored = sessionStorage.getItem(key);
+      if (stored != null && stored !== '') {
+        sessionStorage.removeItem(key);
+        textareaRef.current?.focus();
+      }
+    } catch {
+      /* ignore */
     }
   }, []);
 
@@ -85,10 +96,10 @@ export function ChatInterface() {
   const situation = messages.find((m) => m.role === 'user')?.content ?? '';
 
   return (
-    <div
-      className="flex h-[100dvh] w-full min-w-0 max-w-[100vw] overflow-hidden pb-[76px] pt-[max(0.5rem,env(safe-area-inset-top,0px))] md:pb-0 md:pt-16"
-      style={{ background: 'var(--color-surface)' }}
-    >
+  <div
+    className="flex h-dvh w-full min-w-0 max-w-[100vw] overflow-hidden pb-[76px] pt-[max(0.5rem,env(safe-area-inset-top,0px))] md:pb-0 md:pt-16"
+    style={{ background: 'var(--color-surface)' }}
+  >
       <div className="hidden w-64 shrink-0 md:block overflow-y-auto custom-scrollbar" style={{ borderRight: '1px solid var(--color-border)' }}>
         <ContextPanel
           detectedArea={detectedArea}
