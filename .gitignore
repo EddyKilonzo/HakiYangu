@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+**/dist/
+.next/
+out/
+build/
+
+# Secrets and local env
+.env
+.env.*
+
+# Local tooling
+.claude/
+
+# OS / logs
+.DS_Store
+*.log
