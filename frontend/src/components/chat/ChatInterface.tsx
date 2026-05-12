@@ -85,8 +85,11 @@ export function ChatInterface() {
   const situation = messages.find((m) => m.role === 'user')?.content ?? '';
 
   return (
-    <div className="flex h-[calc(100vh-4.5rem)] md:h-[calc(100vh-5rem)] overflow-hidden" style={{ background: 'var(--color-surface)' }}>
-      <div className="hidden w-72 md:block overflow-y-auto">
+    <div
+      className="flex h-[100dvh] w-full min-w-0 max-w-[100vw] overflow-hidden pb-[76px] pt-[max(0.5rem,env(safe-area-inset-top,0px))] md:pb-0 md:pt-16"
+      style={{ background: 'var(--color-surface)' }}
+    >
+      <div className="hidden w-64 shrink-0 md:block overflow-y-auto custom-scrollbar" style={{ borderRight: '1px solid var(--color-border)' }}>
         <ContextPanel
           detectedArea={detectedArea}
           scenarios={scenarios}
@@ -94,56 +97,56 @@ export function ChatInterface() {
         />
       </div>
 
-      <div className="flex flex-1 flex-col relative">
+      <div className="relative flex h-full min-w-0 flex-1 flex-col">
         <div
-          className="flex items-center justify-between px-6 py-4 z-10"
+          className="flex min-w-0 items-center justify-between gap-2 px-3 py-3 z-10 sm:px-4"
           style={{ 
             background: 'var(--color-surface-raised)', 
             borderBottom: '1px solid var(--color-border)',
             boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
           }}
         >
-          <div>
-            <h1 className="font-serif text-xl font-bold" style={{ color: 'var(--color-primary)' }}>HakiYangu</h1>
-            <p className="text-[10px] uppercase tracking-widest font-bold opacity-40">Kenya Legal Assistant</p>
+          <div className="min-w-0 shrink">
+            <h1 className="font-serif text-lg font-bold truncate" style={{ color: 'var(--color-primary)' }}>HakiYangu</h1>
+            <p className="truncate text-[9px] font-bold uppercase tracking-widest opacity-40">Kenya Legal Assistant</p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
             {suggestLetter && (
               <button
                 onClick={() => setLetterOpen(true)}
-                className="inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-bold transition-all hover:opacity-80 shadow-sm"
+                className="inline-flex max-w-[42vw] items-center gap-1 rounded-lg px-2 py-1.5 text-[9px] font-bold transition-all hover:opacity-80 shadow-sm sm:max-w-none sm:gap-1.5 sm:px-3 sm:text-[10px]"
                 style={{ background: 'var(--color-accent)', color: '#000' }}
               >
                 <LetterIcon />
-                {t.chat.generateLetter}
+                <span className="truncate">{t.chat.generateLetter}</span>
               </button>
             )}
             <button
               onClick={clear}
-              className="inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-semibold transition-all hover:bg-black/5"
+              className="inline-flex max-w-[38vw] items-center gap-1 rounded-lg px-2 py-1.5 text-[9px] font-semibold transition-all hover:bg-black/5 sm:max-w-none sm:gap-1.5 sm:px-3 sm:text-[10px]"
               style={{ border: '1px solid var(--color-border)', color: 'var(--color-text-muted)' }}
             >
               <TrashIcon />
-              {t.chat.clear}
+              <span className="truncate">{t.chat.clear}</span>
             </button>
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-4 md:p-8 scroll-smooth custom-scrollbar">
+        <div className="min-w-0 flex-1 overflow-y-auto overflow-x-hidden p-4 md:p-6 scroll-smooth custom-scrollbar bg-surface/30">
           {messages.length === 0 ? (
-            <div className="flex h-full flex-col items-center justify-center text-center px-4">
+            <div className="mx-auto flex h-full min-w-0 w-full max-w-2xl flex-col items-center justify-start px-4 pb-8 pt-10 text-center sm:pt-14 md:justify-center md:pb-8 md:pt-0">
               <div
-                className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl rotate-3 shadow-default"
+                className="mb-5 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl rotate-3 shadow-default sm:mb-6"
                 style={{ background: 'var(--color-primary)', color: '#FFF6F6' }}
               >
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
               </div>
-              <h2 className="mb-3 font-serif text-2xl font-bold" style={{ color: 'var(--color-text)' }}>{t.chat.emptyTitle}</h2>
-              <p className="max-w-md text-sm leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>{t.chat.emptySubtitle}</p>
+              <h2 className="mb-2 font-serif text-xl font-bold" style={{ color: 'var(--color-text)' }}>{t.chat.emptyTitle}</h2>
+              <p className="max-w-md text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>{t.chat.emptySubtitle}</p>
               
-              <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-lg">
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
                 {scenarios.slice(0, 4).map(s => (
                   <button
                     key={s.id}
@@ -151,45 +154,45 @@ export function ChatInterface() {
                       const q = language === 'sw' ? s.quickQuestionSw : s.quickQuestionEn;
                       send(q);
                     }}
-                    className="p-4 rounded-xl text-left border border-border bg-surface-raised hover:border-primary/30 transition-all hover:shadow-card group"
+                    className="p-3 rounded-xl text-left border border-border bg-surface-raised hover:border-primary/30 transition-all hover:shadow-card group"
                   >
-                    <p className="text-xs font-bold uppercase tracking-wider text-accent mb-1">{language === 'sw' ? s.titleSw : s.titleEn}</p>
-                    <p className="text-sm line-clamp-2 opacity-70 group-hover:opacity-100">{language === 'sw' ? s.descriptionSw : s.descriptionEn}</p>
+                    <p className="text-[9px] font-bold uppercase tracking-wider text-accent mb-0.5">{language === 'sw' ? s.titleSw : s.titleEn}</p>
+                    <p className="text-xs line-clamp-1 opacity-70 group-hover:opacity-100">{language === 'sw' ? s.descriptionSw : s.descriptionEn}</p>
                   </button>
                 ))}
               </div>
             </div>
           ) : (
-            <div className="flex flex-col gap-6 max-w-4xl mx-auto w-full">
+            <div className="mx-auto flex min-w-0 w-full max-w-3xl flex-col gap-5">
               {messages.map((msg) => (
                 <MessageBubble key={msg.id} message={msg} />
               ))}
               {isLoading && <TypingIndicator />}
               {error && (
                 <div
-                  className="rounded-xl px-5 py-4 text-sm font-medium shadow-sm animate-in fade-in slide-in-from-bottom-2"
+                  className="rounded-xl px-4 py-3 text-xs font-medium shadow-sm animate-in fade-in slide-in-from-bottom-2"
                   style={{ border: '1px solid rgba(219,26,26,0.3)', background: 'rgba(219,26,26,0.06)', color: 'var(--color-primary)' }}
                 >
                   <p className="flex items-center gap-2">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                     {error}
                   </p>
                 </div>
               )}
-              <div ref={bottomRef} className="h-4" />
+              <div ref={bottomRef} className="h-2" />
             </div>
           )}
         </div>
 
         <div
-          className="p-4 md:p-6 shadow-default z-10"
+          className="min-w-0 p-3 shadow-default z-10 md:p-4"
           style={{ background: 'var(--color-surface-raised)', borderTop: '1px solid var(--color-border)' }}
         >
-          <div className="mb-4 max-w-4xl mx-auto">
+          <div className="mx-auto mb-2 w-full max-w-3xl min-w-0">
             <QuickScenarios scenarios={scenarios} onSelect={(q) => { setInput(q); textareaRef.current?.focus(); }} />
           </div>
-          <form onSubmit={handleSubmit} className="flex items-end gap-3 max-w-4xl mx-auto">
-            <div className="relative flex-1">
+          <form onSubmit={handleSubmit} className="mx-auto flex min-w-0 max-w-3xl items-end gap-2">
+            <div className="relative min-w-0 flex-1">
               <textarea
                 ref={textareaRef}
                 value={input}
@@ -197,27 +200,27 @@ export function ChatInterface() {
                 onKeyDown={handleKeyDown}
                 placeholder={t.chat.placeholder}
                 rows={1}
-                className="w-full resize-none rounded-2xl px-5 py-4 text-base outline-none transition-all shadow-sm focus:shadow-md"
+                className="w-full resize-none rounded-xl px-4 py-3 text-sm outline-none transition-all shadow-sm focus:shadow-md"
                 style={{
                   border: '1px solid var(--color-border)',
                   background: 'var(--color-surface)',
                   color: 'var(--color-text)',
-                  minHeight: '56px',
-                  maxHeight: '200px'
+                  minHeight: '44px',
+                  maxHeight: '120px'
                 }}
               />
             </div>
             <button
               type="submit"
               disabled={!input.trim() || isLoading}
-              className="flex h-[56px] w-[56px] shrink-0 items-center justify-center rounded-2xl transition-all disabled:opacity-50 hover:scale-105 active:scale-95 shadow-default"
+              className="flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-xl transition-all disabled:opacity-50 hover:scale-105 active:scale-95 shadow-default"
               style={{ background: 'var(--color-primary)', color: '#FFF6F6' }}
             >
               <SendIcon />
             </button>
           </form>
-          <p className="mt-3 text-[10px] text-center opacity-40 font-medium uppercase tracking-[0.2em]">
-            HakiYangu provides legal information, not legal advice.
+          <p className="mt-2 text-[8px] text-center opacity-40 font-medium uppercase tracking-[0.2em]">
+            Legal info only • Not legal advice
           </p>
         </div>
       </div>

@@ -51,7 +51,7 @@ export function HeroSection() {
       {/* Antigravity particles */}
       <Suspense fallback={null}>
         <Antigravity
-          count={120}
+          count={10}
           color="#D4AF37"
           magnetRadius={8}
           ringRadius={6}

@@ -12,9 +12,9 @@ export function QuickScenarios({ scenarios, onSelect }: QuickScenariosProps) {
   const { t, language } = useLanguage();
 
   return (
-    <div className="overflow-x-auto pb-2 custom-scrollbar">
-      <div className="flex gap-2 items-center">
-        <span className="flex-shrink-0 self-center text-[10px] font-bold uppercase tracking-widest opacity-40 mr-2">
+    <div className="w-full min-w-0 max-w-full overflow-x-auto overscroll-x-contain pb-2 custom-scrollbar [-webkit-overflow-scrolling:touch]">
+      <div className="flex w-max min-w-full max-w-none items-center gap-2">
+        <span className="shrink-0 self-center text-[10px] font-bold uppercase tracking-widest opacity-40 mr-2">
           {t.chat.quickScenarios}
         </span>
         {scenarios.map((s) => {
@@ -24,7 +24,7 @@ export function QuickScenarios({ scenarios, onSelect }: QuickScenariosProps) {
             <button
               key={s.id}
               onClick={() => onSelect(question)}
-              className="flex-shrink-0 rounded-xl px-4 py-2 text-xs font-bold transition-all duration-200 border bg-surface-raised shadow-sm hover:shadow-md hover:-translate-y-0.5"
+              className="shrink-0 rounded-xl px-4 py-2 text-xs font-bold transition-all duration-200 border bg-surface-raised shadow-sm hover:shadow-md hover:-translate-y-0.5"
               style={{
                 borderColor: 'var(--color-border)',
                 color: 'var(--color-text)',

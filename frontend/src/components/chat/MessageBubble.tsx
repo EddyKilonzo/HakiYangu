@@ -57,7 +57,7 @@ export function MessageBubble({ message }: MessageBubbleProps) {
               <p className="font-medium">{message.content}</p>
             ) : (
               <div
-                className="prose prose-sm max-w-none prose-headings:font-serif prose-headings:text-primary prose-a:text-primary prose-strong:text-primary"
+                className="prose prose-sm max-w-none min-w-0 break-words prose-headings:font-serif prose-headings:text-primary prose-a:text-primary prose-strong:text-primary"
                 style={{ color: 'var(--color-text)' } as React.CSSProperties}
               >
                 <ReactMarkdown>{message.content}</ReactMarkdown>

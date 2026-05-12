@@ -1,7 +1,7 @@
 .pill-nav-wrapper {
   position: fixed;
-  top: 2.75rem;
-  left: 50%;
+  top: 1.25rem;
+  left: 58%;
   transform: translateX(-50%);
   z-index: 100;
   width: auto;
