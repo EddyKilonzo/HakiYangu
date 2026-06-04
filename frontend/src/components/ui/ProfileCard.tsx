@@ -7,6 +7,7 @@ import './ProfileCard.css';
 
 interface ProfileCardProps {
   avatarUrl?: string;
+  initials?: string;
   iconUrl?: string;
   grainUrl?: string;
   innerGradient?: string;
@@ -28,7 +29,8 @@ interface ProfileCardProps {
 }
 
 const ProfileCard: React.FC<ProfileCardProps> = ({
-  avatarUrl = "https://i.pravatar.cc/150?u=haki",
+  avatarUrl,
+  initials,
   iconUrl,
   grainUrl,
   innerGradient,
@@ -50,6 +52,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   // Motion values for tilt
   const x = useMotionValue(0);
@@ -135,7 +138,18 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 
           <div className="pc-content">
             <div className="pc-avatar-container">
-              <img src={avatarUrl} alt={name} className="pc-main-avatar" />
+              {avatarUrl && !imageError ? (
+                <img 
+                  src={avatarUrl} 
+                  alt={name} 
+                  className="pc-main-avatar" 
+                  onError={() => setImageError(true)}
+                />
+              ) : (
+                <div className="pc-main-avatar flex items-center justify-center bg-zinc-800 text-xl font-bold text-white border-2 border-zinc-700">
+                  {initials || name.charAt(0)}
+                </div>
+              )}
               <div className={`pc-status-indicator ${status.toLowerCase()}`} />
             </div>
 

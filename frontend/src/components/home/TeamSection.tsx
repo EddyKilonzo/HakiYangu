@@ -4,13 +4,12 @@ import ProfileCard from '@/components/ui/ProfileCard';
 
 const TEAM = [
   {
-    name: 'Martha Ngendo',
+    name: 'Marthe Ngendo',
     role: 'Co-Founder & Product Lead',
-    handle: 'martha_haki',
+    handle: 'marthe_haki',
     bio: 'Drives the vision of making Kenyan legal information accessible to every citizen, in every corner of the country.',
     initials: 'MN',
     color: '#DB1A1A',
-    photo: 'https://images.unsplash.com/photo-1531123897727-8f129e16fd3c?auto=format&fit=crop&w=400&q=80',
   },
   {
     name: 'Eddy Max Kilonzo',
@@ -19,7 +18,6 @@ const TEAM = [
     bio: 'Builds the APIs and data pipelines that connect HakiYangu to authoritative Kenyan legal sources.',
     initials: 'EK',
     color: '#D4AF37',
-    photo: 'https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&w=400&q=80',
   },
   {
     name: 'John Brandews',
@@ -28,16 +26,14 @@ const TEAM = [
     bio: 'Crafts the seamless experience from the AI chat engine to the responsive interfaces Kenyans rely on daily.',
     initials: 'JB',
     color: '#16a34a',
-    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
   },
   {
-    name: 'Tony Felix Maloba',
+    name: 'Felix Tony Maloba',
     role: 'UI/UX Designer',
-    handle: 'tony_pixels',
+    handle: 'felix_pixels',
     bio: 'Ensures every interaction on HakiYangu feels intuitive, trustworthy, and distinctly Kenyan.',
-    initials: 'TM',
+    initials: 'FM',
     color: '#6366f1',
-    photo: 'https://images.unsplash.com/photo-1567532939604-b6c5b0ad2e01?auto=format&fit=crop&w=400&q=80',
   },
 ];
 
@@ -76,7 +72,7 @@ export function TeamSection() {
                 name={member.name}
                 title=""
                 handle={member.handle}
-                avatarUrl={member.photo}
+                initials={member.initials}
                 behindGlowColor={`${member.color}66`}
                 behindGlowSize="60%"
                 innerGradient={`linear-gradient(145deg, rgba(20,20,20,0.4) 0%, ${member.color}11 100%)`}
