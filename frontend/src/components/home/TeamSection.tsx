@@ -4,9 +4,9 @@ import ProfileCard from '@/components/ui/ProfileCard';
 
 const TEAM = [
   {
-    name: 'Marthe Ngendo',
+    name: 'Martha Ngendo',
     role: 'Product Lead',
-    handle: 'marthe_haki',
+    handle: 'martha_haki',
     bio: 'Drives the vision of making Kenyan legal information accessible to every citizen, in every corner of the country.',
     initials: 'MN',
     color: '#DB1A1A',

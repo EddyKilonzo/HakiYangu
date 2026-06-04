@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
 const TEAM = [
   {
-    name: 'Marthe Ngendo',
+    name: 'Martha Ngendo',
     role: 'Product Lead',
     bio: 'Drives the vision of making Kenyan legal information accessible to every citizen, in every corner of the country.',
     initials: 'MN',
