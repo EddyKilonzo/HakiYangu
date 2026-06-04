@@ -4,37 +4,37 @@ import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
 const TEAM = [
   {
-    name: 'Jimmy Mbaru',
-    role: 'Full-Stack Developer & Co-Founder',
-    bio: 'Architect of the HakiYangu platform — from database design to the AI legal engine powering every conversation.',
-    photo: 'https://randomuser.me/api/portraits/men/33.jpg',
+    name: 'Marthe Ngendo',
+    role: 'Product Lead',
+    bio: 'Drives the vision of making Kenyan legal information accessible to every citizen, in every corner of the country.',
+    initials: 'MN',
     color: '#DB1A1A',
-    github: 'https://github.com/Jimmy-Mbaru',
+    github: '#',
     linkedin: '#',
   },
   {
-    name: 'Eddy Kilonzo',
-    role: 'Backend Engineer & Co-Founder',
+    name: 'Eddy Max Kilonzo',
+    role: 'Software Engineer',
     bio: 'Builds the APIs and data pipelines that connect HakiYangu to authoritative Kenyan legal sources.',
-    photo: 'https://randomuser.me/api/portraits/men/32.jpg',
+    initials: 'EK',
     color: '#D4AF37',
     github: '#',
     linkedin: '#',
   },
   {
-    name: 'Wanjiku Njeri',
-    role: 'Legal Research Analyst',
-    bio: 'Ensures every answer reflects the most current Kenyan statutes, case law, and constitutional provisions.',
-    photo: 'https://randomuser.me/api/portraits/women/44.jpg',
+    name: 'John Brandews',
+    role: 'Full-Stack Developer',
+    bio: 'Crafts the seamless experience from the AI chat engine to the responsive interfaces Kenyans rely on daily.',
+    initials: 'JB',
     color: '#16a34a',
     github: '#',
     linkedin: '#',
   },
   {
-    name: 'Omondi Achieng',
-    role: 'Product Designer',
-    bio: 'Shapes the experience so legal information feels approachable, clear, and useful for every Kenyan.',
-    photo: 'https://randomuser.me/api/portraits/men/44.jpg',
+    name: 'Felix Tony Maloba',
+    role: 'UI/UX Designer',
+    bio: 'Ensures every interaction on HakiYangu feels intuitive, trustworthy, and distinctly Kenyan.',
+    initials: 'FM',
     color: '#6366f1',
     github: '#',
     linkedin: '#',
@@ -325,12 +325,16 @@ export default function AboutPage() {
               >
                 <div className="absolute inset-x-0 top-0 h-0.5" style={{ background: member.color }} />
                 <div className="relative mb-4">
-                  <img
-                    src={member.photo}
-                    alt={member.name}
-                    className="h-24 w-24 rounded-full object-cover"
-                    style={{ border: `3px solid ${member.color}44` }}
-                  />
+                  <div 
+                    className="h-24 w-24 rounded-full flex items-center justify-center text-xl font-bold text-white"
+                    style={{ 
+                      background: 'rgba(255,246,246,0.08)', 
+                      border: `3px solid ${member.color}44`,
+                      color: member.color
+                    }}
+                  >
+                    {member.initials}
+                  </div>
                   <div
                     className="absolute -bottom-1 -right-1 h-6 w-6 rounded-full flex items-center justify-center"
                     style={{ background: member.color, border: '2px solid var(--color-dark)' }}

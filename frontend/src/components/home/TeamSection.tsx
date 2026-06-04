@@ -70,7 +70,7 @@ export function TeamSection() {
             >
               <ProfileCard
                 name={member.name}
-                title=""
+                title={member.role}
                 handle={member.handle}
                 initials={member.initials}
                 behindGlowColor={`${member.color}66`}
