@@ -120,8 +120,8 @@ HakiYangu is an informational tool and **does not provide legal advice**. It is 
 
 ## 👥 The Team
 
-- **Marthe Ngendo** - Co-Founder & Product Lead
-- **Eddy Max Kilonzo** - Co-Founder & Backend Engineer
+- **Marthe Ngendo** - Product Lead
+- **Eddy Max Kilonzo** - Software Engineer
 - **John Brandews** - Full-Stack Developer
 - **Felix Tony Maloba** - UI/UX Designer
 

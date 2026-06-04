@@ -5,7 +5,7 @@ import ProfileCard from '@/components/ui/ProfileCard';
 const TEAM = [
   {
     name: 'Marthe Ngendo',
-    role: 'Co-Founder & Product Lead',
+    role: 'Product Lead',
     handle: 'marthe_haki',
     bio: 'Drives the vision of making Kenyan legal information accessible to every citizen, in every corner of the country.',
     initials: 'MN',
@@ -13,7 +13,7 @@ const TEAM = [
   },
   {
     name: 'Eddy Max Kilonzo',
-    role: 'Co-Founder & Backend Engineer',
+    role: 'Software Engineer',
     handle: 'eddy_dev',
     bio: 'Builds the APIs and data pipelines that connect HakiYangu to authoritative Kenyan legal sources.',
     initials: 'EK',
