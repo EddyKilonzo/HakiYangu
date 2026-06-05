@@ -18,7 +18,12 @@ async function bootstrap() {
 }
 
 export default async (req: any, res: any) => {
-  const app = await bootstrap();
-  const instance = app.getHttpAdapter().getInstance();
-  instance(req, res);
+  try {
+    const app = await bootstrap();
+    const instance = app.getHttpAdapter().getInstance();
+    instance(req, res);
+  } catch (err) {
+    console.error('[HakiYangu] Bootstrap error:', err);
+    res.status(500).json({ error: (err as Error).message });
+  }
 };
