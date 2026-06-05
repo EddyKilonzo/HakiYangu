@@ -61,7 +61,7 @@ export function ScenariosGrid({ scenarios }: ScenariosGridProps) {
           <h2 className="mb-4 font-serif text-3xl font-bold md:text-4xl" style={{ color: 'var(--color-text)' }}>
             {t.scenarios.title}
           </h2>
-          <div className="mx-auto h-px w-16" style={{ background: 'var(--color-accent)' }} />
+          <div className="mx-auto h-px w-16" style={{ background: 'var(--color-primary)' }} />
           <p className="mt-4 text-sm" style={{ color: 'var(--color-text-muted)' }}>{t.scenarios.subtitle}</p>
         </div>
 

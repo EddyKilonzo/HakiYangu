@@ -44,7 +44,7 @@ function LetterIcon() {
 
 export function ChatInterface() {
   const { language, t } = useLanguage();
-  const { messages, isLoading, error, detectedArea, suggestLetter, send, clear } = useChat(language);
+  const { messages, isLoading, error, detectedArea, suggestLetter, rateLimit, send, clear } = useChat(language);
   const [input, setInput] = useState(() => {
     if (typeof window === 'undefined') return '';
     try {
@@ -167,7 +167,7 @@ export function ChatInterface() {
                     }}
                     className="p-3 rounded-xl text-left border border-border bg-surface-raised hover:border-primary/30 transition-all hover:shadow-card group"
                   >
-                    <p className="text-[9px] font-bold uppercase tracking-wider text-accent mb-0.5">{language === 'sw' ? s.titleSw : s.titleEn}</p>
+                    <p className="text-[9px] font-bold uppercase tracking-wider mb-0.5" style={{ color: 'var(--color-primary)' }}>{language === 'sw' ? s.titleSw : s.titleEn}</p>
                     <p className="text-xs line-clamp-1 opacity-70 group-hover:opacity-100">{language === 'sw' ? s.descriptionSw : s.descriptionEn}</p>
                   </button>
                 ))}
@@ -230,9 +230,16 @@ export function ChatInterface() {
               <SendIcon />
             </button>
           </form>
-          <p className="mt-2 text-[8px] text-center opacity-40 font-medium uppercase tracking-[0.2em]">
-            Legal info only • Not legal advice
-          </p>
+          <div className="mt-2 flex items-center justify-center gap-4">
+            <p className="text-[8px] opacity-40 font-medium uppercase tracking-[0.2em]">
+              Legal info only • Not legal advice
+            </p>
+            {rateLimit?.remaining && (
+              <p className="text-[8px] font-bold uppercase tracking-wider" style={{ color: 'var(--color-primary)', opacity: parseInt(rateLimit.remaining) < 3 ? 1 : 0.6 }}>
+                {rateLimit.remaining} {language === 'sw' ? 'ujumbe umebakia' : 'messages left'}
+              </p>
+            )}
+          </div>
         </div>
       </div>
 

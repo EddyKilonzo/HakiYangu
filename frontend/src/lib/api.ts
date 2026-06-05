@@ -5,12 +5,18 @@ const isBrowser = typeof window !== 'undefined';
 // On localhost, we call the backend directly on port 3001.
 const API_URL = process.env.NEXT_PUBLIC_API_URL || (isBrowser ? '/api' : 'http://localhost:3001');
 
+export interface RateLimitInfo {
+  limit?: string;
+  remaining?: string;
+  reset?: string;
+}
+
 export async function sendMessage(params: {
   message: string;
   history: Message[];
   language: Language;
   sessionId: string;
-}): Promise<ChatResponse> {
+}): Promise<ChatResponse & { ratelimit?: RateLimitInfo }> {
   const res = await fetch(`${API_URL}/chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -21,8 +27,25 @@ export async function sendMessage(params: {
       sessionId: params.sessionId,
     }),
   });
-  if (!res.ok) throw new Error(`Chat request failed: ${res.status}`);
-  return res.json();
+
+  const ratelimit: RateLimitInfo = {
+    limit: res.headers.get('x-ratelimit-limit') || undefined,
+    remaining: res.headers.get('x-ratelimit-remaining') || undefined,
+    reset: res.headers.get('x-ratelimit-reset') || undefined,
+  };
+
+  if (!res.ok) {
+    if (res.status === 429) {
+      const data = await res.json().catch(() => ({}));
+      const err = new Error(data.message || 'Too many requests. Please wait a minute.');
+      (err as any).ratelimit = ratelimit;
+      throw err;
+    }
+    throw new Error(`Chat request failed: ${res.status}`);
+  }
+  
+  const data = await res.json();
+  return { ...data, ratelimit };
 }
 
 export async function generateLetter(params: {
@@ -41,7 +64,13 @@ export async function generateLetter(params: {
       letterType: params.letterType,
     }),
   });
-  if (!res.ok) throw new Error(`Letter request failed: ${res.status}`);
+  if (!res.ok) {
+    if (res.status === 429) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.message || 'Too many requests. Please wait a minute.');
+    }
+    throw new Error(`Letter request failed: ${res.status}`);
+  }
   return res.json();
 }
 

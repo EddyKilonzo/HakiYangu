@@ -30,7 +30,7 @@ Format the letter properly with:
 - Date placeholder: [DATE]
 - Sender details placeholder: [YOUR NAME], [YOUR ADDRESS], [YOUR CONTACT]
 - Recipient details placeholder: [RECIPIENT NAME/TITLE], [RECIPIENT ADDRESS]
-- Reference to specific Kenyan laws
+- Reference to the Constitution of Kenya 2010 (relevant Articles) and specific Kenyan Acts of Parliament
 - Clear statement of the grievance
 - Specific demand or complaint
 - Deadline for response (14 days)
@@ -39,7 +39,7 @@ Format the letter properly with:
 On the very last line output exactly: SUBJECT:<brief subject line>`;
 
     const response = await this.client.messages.create({
-      model: 'claude-sonnet-4-5',
+      model: 'claude-3-5-sonnet-20241022',
       max_tokens: 1500,
       messages: [{ role: 'user', content: prompt }],
     });
