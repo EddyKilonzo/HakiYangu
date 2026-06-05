@@ -10,11 +10,12 @@ import { CustomThrottlerGuard } from './common/guards/throttler.guard';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    ThrottlerModule.forRoot([{
-      ttl: 60000,
-      limit: 5,
-      generateHeaders: true,
-    }]),
+    ThrottlerModule.forRoot({
+      throttlers: [{
+        ttl: 60000,
+        limit: 5,
+      }],
+    }),
     ChatModule,
     LetterModule,
     ScenariosModule,
