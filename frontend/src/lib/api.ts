@@ -2,7 +2,7 @@ import { ChatResponse, Language, LetterResponse, Message, Scenario } from './typ
 
 const isBrowser = typeof window !== 'undefined';
 // In production on Vercel, requests to /api/* are routed to the backend service.
-// On localhost, we call the backend directly on port 3001.
+// On localhost, we use '/api' which is then rewritten by next.config.ts to localhost:3001.
 const API_URL = process.env.NEXT_PUBLIC_API_URL || (isBrowser ? '/api' : 'http://localhost:3001');
 
 export interface RateLimitInfo {
