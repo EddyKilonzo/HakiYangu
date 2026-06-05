@@ -41,11 +41,12 @@ After providing your response, on the VERY LAST LINE output exactly: SUGGEST_LET
 
 @Injectable()
 export class ChatService {
-  private readonly client: Anthropic;
   private readonly sessions = new Map<string, MessageDto[]>();
 
-  constructor(private config: ConfigService) {
-    this.client = new Anthropic({ apiKey: this.config.get('ANTHROPIC_API_KEY') });
+  constructor(private config: ConfigService) {}
+
+  private get client(): Anthropic {
+    return new Anthropic({ apiKey: this.config.get('ANTHROPIC_API_KEY') });
   }
 
   async chat(dto: ChatDto): Promise<{ reply: string; detectedArea: string; suggestLetter: boolean }> {

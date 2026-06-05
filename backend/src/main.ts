@@ -12,4 +12,7 @@ async function bootstrap() {
   await app.listen(process.env.PORT ?? 3001, '0.0.0.0');
   console.log(`HakiYangu backend running on port ${process.env.PORT ?? 3001}`);
 }
-bootstrap();
+bootstrap().catch((err) => {
+  console.error('Fatal startup error:', err);
+  process.exit(1);
+});

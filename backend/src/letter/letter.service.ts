@@ -5,10 +5,10 @@ import { LetterDto } from '../chat/chat.dto';
 
 @Injectable()
 export class LetterService {
-  private readonly client: Anthropic;
+  constructor(private config: ConfigService) {}
 
-  constructor(private config: ConfigService) {
-    this.client = new Anthropic({ apiKey: this.config.get('ANTHROPIC_API_KEY') });
+  private get client(): Anthropic {
+    return new Anthropic({ apiKey: this.config.get('ANTHROPIC_API_KEY') });
   }
 
   async generateLetter(dto: LetterDto): Promise<{ letter: string; subject: string }> {
